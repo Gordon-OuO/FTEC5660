@@ -1,10 +1,10 @@
 
 # UNBench Task 1 Reproduction: Gemini-2.5-Flash vs GPT-4o (FTEC5660 Project)
 
-[![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/YOUR_USERNAME/unbench-gemini/blob/main/run_task1_ipynb-De-Fu-Ben.ipynb)
+[![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/YOUR_USERNAME/unbench-gemini/blob/main/reproduce_run_task1.ipynb)
 
 ## 🎯 Project Summary
-Reproduced UNBench Task 1 (Co-penholder Judgment) from [2502.14122v2](https://arxiv.org/abs/2502.14122) using **Gemini-2.5-Flash** (no fine-tuning). 
+Reproduced UNBench Task 1 (Co-penholder Choosing) from [2502.14122v2](https://arxiv.org/abs/2502.14122) using **Gemini-2.5-Flash** (no fine-tuning). 
 - **Baseline**: Matched paper's scaling law (72.6%→46.4% acc as choices increase)
 - **Modification**: CoT prompting (surprisingly hurt hard cases, insightful failure!)
 - Fixed reproducible subset: **first 30 instances per k** (2/3/4/5 choices)
@@ -15,13 +15,13 @@ Reproduced UNBench Task 1 (Co-penholder Judgment) from [2502.14122v2](https://ar
 |-------|----|----|----|----|
 | **Paper GPT-4o** | **72.6%** | 61.3% | 51.1% | **46.4%** |
 | **Gemini baseline** | **83.3%** | 60.0% | 40.0% | 46.7% |
-| **Gemini + CoT** | 66.7% | **73.3%** | 36.7% | 26.7% |
+| **Gemini + CoT** | 66.7% | **70.0%** | 36.7% | 26.7% |
 
 **✅ Success**: Perfect trend reproduction (easy>>hard). **Insight**: CoT overthinks diplomatic nuance.
 
 ## 🚀 Quickstart (Colab)
 
-1. **Open Colab**: [Click here](https://colab.research.google.com/github/YOUR_USERNAME/unbench-gemini/blob/main/run_task1_ipynb-De-Fu-Ben.ipynb)
+1. **Open Colab**: [Click here](https://colab.research.google.com/github/YOUR_USERNAME/unbench-gemini/blob/main/reproduce_run_task1.ipynb)
 2. **API Key**: Add `VERTEX_API_KEY` in [Colab Secrets](https://colab.research.google.com/notebook#fileId=YOUR_NOTEBOOK)
 3. **Run cells 1-10**: Downloads data (~2GB), runs **baseline** (~5min)
 4. **Run CoT cells**: Modified prompting (~3min extra)
@@ -36,26 +36,20 @@ Reproduced UNBench Task 1 (Co-penholder Judgment) from [2502.14122v2](https://ar
 
 **Environment**: Google Colab (Python 3.12, GPU optional)
 **Model**: `gemini-2.5-flash` via Vertex AI (langchain-google-genai v4.2.1)
-**Data**: First 30 instances from `task1.json` (355k total, ~120 inferences)
+**Data**: data/task1.json and data/task1/
 **Reproducibility**: Fixed subset `drafts[:30]`, `authors[:30]`, `choices_k[:30]`
 **Invalid handling**: Random fallback (low rate: <5%)
 **Compute**: ~240 total inferences, ~10min end-to-end
 
 ## 📁 Repository Structure
 ```
-├── run_task1_ipynb-De-Fu-Ben.ipynb     # Main notebook (baseline + CoT)
-├── task1_results.csv                   # Results table (CSV)
-├── data/                               # Downloaded (~2GB, gitignore)
-│   ├── task1.json                      # 355k instances
-│   └── folders/1919/,1938/,etc...      # Draft PDFs/JSONs
-└── report.pdf                          # Full writeup
+├── reproduce_run_task1.ipynb           # Main notebook (baseline + CoT)
+└── README.md                           # This documentation
 ```
 
 ## 🔧 Debug Diary (Key Fixes)
-1. **Path issue**: `'/../content/data/task1'` → `'data/task1'` 
-2. **Invalid responses**: Added `random.choice(fallback)` + logging
-3. **Rate limits**: `temperature=0`, batch size 30
-4. **Subset**: `[:30]` slicing for reproducibility
+1. **Invalid responses**: Added `random.choice(fallback)` + logging
+2. **Subset**: `[:30]` slicing for reproducibility
 
 ## 📝 Modification Analysis
 **Hypothesis**: CoT would boost hard cases (1/5 choices).
@@ -78,5 +72,3 @@ Reproduced UNBench Task 1 (Co-penholder Judgment) from [2502.14122v2](https://ar
   year={2026}
 }
 ```
-
-**FTEC5660 Agentic AI Submission** - Mar 1, 2026
