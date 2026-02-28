@@ -1,8 +1,6 @@
 
 # UNBench Task 1 Reproduction: Gemini-2.5-Flash vs GPT-4o (FTEC5660 Project)
 
-[![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/YOUR_USERNAME/unbench-gemini/blob/main/reproduce_run_task1.ipynb)
-
 ## 🎯 Project Summary
 Reproduced UNBench Task 1 (Co-penholder Choosing) from [2502.14122v2](https://arxiv.org/abs/2502.14122) using **Gemini-2.5-Flash** (no fine-tuning). 
 - **Baseline**: Matched paper's scaling law (72.6%→46.4% acc as choices increase)
@@ -21,7 +19,7 @@ Reproduced UNBench Task 1 (Co-penholder Choosing) from [2502.14122v2](https://ar
 
 ## 🚀 Quickstart (Colab)
 
-1. **Open Colab**: [Click here](https://colab.research.google.com/github/YOUR_USERNAME/unbench-gemini/blob/main/reproduce_run_task1.ipynb)
+1. **Open Colab**: [Click here](https://colab.research.google.com/drive/1AT8jb-nUhQHyOKf3grFtIMz_5pu2wDdO?usp=sharing)
 2. **API Key**: Add `VERTEX_API_KEY` in [Colab Secrets](https://colab.research.google.com/notebook#fileId=YOUR_NOTEBOOK)
 3. **Run cells 1-10**: Downloads data (~2GB), runs **baseline** (~5min)
 4. **Run CoT cells**: Modified prompting (~3min extra)
