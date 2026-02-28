@@ -42,6 +42,10 @@ Reproduced UNBench Task 1 (Co-penholder Choosing) from [2502.14122v2](https://ar
 ## 📁 Repository Structure
 ```
 ├── reproduce_run_task1.ipynb           # Main notebook (baseline + CoT)
+├── data/
+|   ├── task1.json                      # 355k instances
+|      ...
+│   └── folders/1919/,1938/,etc...      # Draft PDFs/JSONs
 └── README.md                           # This documentation
 ```
 
